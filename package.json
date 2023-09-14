@@ -13,6 +13,11 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "m:c": "typeorm migration:create src/migrations/$name",
+    "m:g": "typeorm migration:generate -d ./dist/database/data-source/index.js ./src/database/migrations/$name",
+    "m:up": "typeorm migration:run -d ./dist/database/data-source/index.js",
+    "m:down": "typeorm migration:revert -d ./dist/database/data-source/index.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
@@ -21,10 +26,16 @@
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^3.1.1",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/typeorm": "^10.0.0",
+    "@types/joi": "^17.2.3",
+    "joi": "^17.10.1",
+    "mysql2": "^3.6.1",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "typeorm": "^0.3.17"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",
