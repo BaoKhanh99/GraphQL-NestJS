@@ -10,4 +10,4 @@ import config from './data-source/config';
     }),
   ],
 })
-export class DatabaseModule {}
+export class DatabaseProviderModule {}
