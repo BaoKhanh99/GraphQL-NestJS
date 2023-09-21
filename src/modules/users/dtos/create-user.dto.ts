@@ -1,11 +1,9 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { IsNotEmpty, IsString } from 'class-validator';
 
-import { UpperCaseFirstMiddleware } from '@/common/field-middleware/app.field-middleware';
-
 @InputType()
 export class CreateUserDto {
-  @Field({ middleware: [UpperCaseFirstMiddleware] })
+  @Field()
   @IsString()
   @IsNotEmpty()
   userName: string;

@@ -8,10 +8,12 @@ import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { AppConfigModule } from './config/config.module';
 import { DatabaseProviderModule } from './database/database-provider.module';
 import { GraphQLProviderModule } from './graphql/graphql.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/users/user.module';
 
 @Module({
   imports: [
+    AuthModule,
     AppConfigModule,
     DatabaseProviderModule,
     GraphQLProviderModule,
