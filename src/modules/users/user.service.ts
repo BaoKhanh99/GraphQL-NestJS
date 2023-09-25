@@ -24,4 +24,10 @@ export class UserService {
 
     return plainToInstance(UserDto, user);
   }
+
+  async delete(id: number): Promise<boolean> {
+    await this.repository.delete(id);
+
+    return true;
+  }
 }

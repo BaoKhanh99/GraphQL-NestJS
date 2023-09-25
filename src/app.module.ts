@@ -1,4 +1,5 @@
 import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 import { LoggerModule } from 'nestjs-pino';
 
 import { AppController } from './app.controller';
@@ -15,6 +16,7 @@ import { UserModule } from './modules/users/user.module';
     DatabaseProviderModule,
     GraphQLProviderModule,
     UserModule,
+    EventEmitterModule.forRoot(),
     LoggerModule.forRoot({
       pinoHttp: {
         autoLogging: false,
