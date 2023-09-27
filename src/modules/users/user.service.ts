@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { plainToInstance } from 'class-transformer';
-import { Repository } from 'typeorm';
+import { FindOptionsWhere, Repository } from 'typeorm';
 
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UserDto } from './dtos/user.dto';
@@ -17,6 +17,10 @@ export class UserService {
     const user = await this.repository.findOneBy({ id });
 
     return plainToInstance(UserDto, user);
+  }
+
+  async findUserBy(where: FindOptionsWhere<User>): Promise<User> {
+    return this.repository.findOneByOrFail(where);
   }
 
   async create(input: CreateUserDto): Promise<UserDto> {
