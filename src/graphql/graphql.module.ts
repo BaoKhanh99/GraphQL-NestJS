@@ -18,8 +18,9 @@ import {
         context: ({ req, res }) => ({ req, res }),
         stringifyResult: (value: FormattedExecutionResult) =>
           formatResponse(value),
-        formatError: (formatError: GraphQLFormattedError) =>
-          formatGraphqlError(formatError),
+        formatError: (formatError: GraphQLFormattedError) => {
+          return formatGraphqlError(formatError);
+        },
       }),
     }),
   ],

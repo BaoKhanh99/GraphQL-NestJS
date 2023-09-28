@@ -1,6 +1,6 @@
-import { HttpCode, NotFoundException, UseInterceptors } from '@nestjs/common';
+import { HttpStatus, NotFoundException, ParseIntPipe } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { MailNotificationService } from '../mail/mail-notification.service';
 import { PROVIDERS } from '../notification/notification.provider';
@@ -21,7 +21,12 @@ export class UserResolver {
 
   @Query(() => UserDto)
   async get(
-    @Args({ name: 'id', type: () => ID })
+    @Args(
+      { name: 'id', type: () => Int },
+      new ParseIntPipe({
+        errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+      }),
+    )
     id: number,
   ): Promise<UserDto> {
     return this.userService.getUser(id);

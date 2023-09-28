@@ -1,5 +1,8 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsNotEmpty, IsString, ValidateNested } from 'class-validator';
+
+import { CreateAddressDto } from '@/modules/addresses/dtos/create-address.dto';
 
 @InputType()
 export class CreateUserDto {
@@ -17,4 +20,9 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   password: string;
+
+  @Field(() => [CreateAddressDto])
+  @Type(() => CreateAddressDto)
+  @ValidateNested()
+  address: CreateAddressDto[];
 }
