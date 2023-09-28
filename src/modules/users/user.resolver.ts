@@ -1,3 +1,4 @@
+import { HttpCode, NotFoundException, UseInterceptors } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
 
@@ -9,6 +10,7 @@ import { UserDto } from './dtos/user.dto';
 import { UserService } from './user.service';
 
 import { EventConstant } from '@/common/constants/event.constant';
+import { Public } from '@/common/decorators/public.decorator';
 
 @Resolver()
 export class UserResolver {
@@ -23,6 +25,12 @@ export class UserResolver {
     id: number,
   ): Promise<UserDto> {
     return this.userService.getUser(id);
+  }
+
+  @Public()
+  @Query(() => String)
+  async notfound(): Promise<string> {
+    throw new NotFoundException('Not found exception');
   }
 
   @Mutation(() => UserDto)

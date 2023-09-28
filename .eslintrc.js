@@ -44,5 +44,7 @@ module.exports = {
         "caughtErrorsIgnorePattern": "^_"
       }
     ],
+    'consistent-return': 'off',
+    '@typescript-eslint/dot-notation': 'off',
   },
 };
