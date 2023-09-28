@@ -45,6 +45,7 @@ module.exports = {
       }
     ],
     'consistent-return': 'off',
+    'no-useless-return': 'off',
     '@typescript-eslint/dot-notation': 'off',
   },
 };

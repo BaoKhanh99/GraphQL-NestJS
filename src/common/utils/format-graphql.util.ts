@@ -1,6 +1,10 @@
 import { FormattedExecutionResult, GraphQLFormattedError } from 'graphql';
 
 export function formatResponse(value: FormattedExecutionResult) {
+  if (value.data?.['__schema']) {
+    return JSON.stringify({ data: value.data });
+  }
+
   if (value.errors) {
     return JSON.stringify({ errors: value.errors });
   }
