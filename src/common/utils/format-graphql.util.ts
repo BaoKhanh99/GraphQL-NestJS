@@ -1,5 +1,7 @@
 import { FormattedExecutionResult, GraphQLFormattedError } from 'graphql';
 
+import { errorCode } from '../constants/app.constant';
+
 export function formatResponse(value: FormattedExecutionResult) {
   if (value.data?.['__schema']) {
     return JSON.stringify({ data: value.data });
@@ -17,8 +19,12 @@ export function formatResponse(value: FormattedExecutionResult) {
 }
 
 export function formatGraphqlError(formatError: GraphQLFormattedError) {
+  const graphqlErrorCode = !formatError.extensions.originalError
+    ? errorCode[formatError.extensions.code as string]
+    : formatError.extensions.originalError['statusCode'];
+
   return {
     message: formatError.message,
-    statusCode: formatError.extensions.status,
+    statusCode: graphqlErrorCode,
   };
 }

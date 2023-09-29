@@ -1,10 +1,15 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
+
+import { Address } from '../addresses/address.entity';
 
 import { EntityConstant } from '@/common/constants/entity.constant';
 import { BaseEntity } from '@/common/entities/base.entity';
 
 @Entity('users')
 export class User extends BaseEntity {
+  @OneToMany(() => Address, (address) => address.user)
+  addresses: Address[];
+
   @Column({
     type: 'varchar',
     name: 'name',
